@@ -1,4 +1,4 @@
-AshotStorm - A Modern Probabilistic Model Checker
+Storm - A Modern Probabilistic Model Checker
 ============================================
 
 [![Build Status](https://github.com/moves-rwth/storm/workflows/Build%20Test/badge.svg)](https://github.com/moves-rwth/storm/actions)
