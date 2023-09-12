@@ -75,9 +75,9 @@ bool GeneralSimulator<ValueType>::isSinkState() const {
 template<typename ValueType>
 std::vector<std::string> GeneralSimulator<ValueType>::getCurrentStateLabelling() const {
     std::vector<std::string> labels;
-    for (auto const& label : helperGetLabels()) {
-        if (stateGenerator->evaluateBooleanExpressionInCurrentState(label.getStatePredicateExpression())) {
-            labels.push_back(label.getName());
+    for (auto const& label : stateGenerator->computeLabelling()) {
+        if (stateGenerator->evaluateBooleanExpressionInCurrentState(label.second)) {
+            labels.push_back(label.first);
         }
     }
     return labels;

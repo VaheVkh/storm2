@@ -52,6 +52,7 @@ class ActionMask {
      * @return true if the mask allows building the action/edge/command
      */
     virtual bool query(storm::generator::NextStateGenerator<ValueType, StateType> const& generator, uint64_t actionIndex) = 0;
+
 };
 
 /*!
@@ -121,6 +122,8 @@ class NextStateGenerator {
     virtual storm::models::sparse::StateLabeling label(storm::storage::sparse::StateStorage<StateType> const& stateStorage,
                                                        std::vector<StateType> const& initialStateIndices = {},
                                                        std::vector<StateType> const& deadlockStateIndices = {}) = 0;
+
+    virtual std::vector<std::pair<std::string, storm::expressions::Expression>> computeLabelling() = 0;
 
     NextStateGeneratorOptions const& getOptions() const;
 

@@ -836,6 +836,27 @@ storm::models::sparse::StateLabeling PrismNextStateGenerator<ValueType, StateTyp
 }
 
 template<typename ValueType, typename StateType>
+std::vector<std::pair<std::string, storm::expressions::Expression>> PrismNextStateGenerator<ValueType, StateType>::computeLabelling(){
+    std::vector<std::pair<std::string, storm::expressions::Expression>> labels;
+    if (this->options.isBuildAllLabelsSet()) {
+        for (auto const& label : program.getLabels()) {
+            labels.push_back(std::make_pair(label.getName(), label.getStatePredicateExpression()));
+        }
+    } else {
+        for (auto const& labelName : this->options.getLabelNames()) {
+            if (program.hasLabel(labelName)) {
+                labels.push_back(std::make_pair(labelName, program.getLabelExpression(labelName)));
+            } else {
+                STORM_LOG_THROW(labelName == "init" || labelName == "deadlock", storm::exceptions::InvalidArgumentException,
+                                "Cannot build labeling for unknown label '" << labelName << "'.");
+            }
+        }
+    }
+
+    return labels;
+}
+
+template<typename ValueType, typename StateType>
 storm::storage::BitVector PrismNextStateGenerator<ValueType, StateType>::evaluateObservationLabels(CompressedState const& state) const {
     // TODO consider to avoid reloading by computing these bitvectors in an earlier build stage
     storm::storage::BitVector result(program.getNumberOfObservationLabels() * 64);

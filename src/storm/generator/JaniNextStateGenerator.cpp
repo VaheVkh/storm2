@@ -1223,6 +1223,19 @@ storm::models::sparse::StateLabeling JaniNextStateGenerator<ValueType, StateType
 }
 
 template<typename ValueType, typename StateType>
+std::vector<std::pair<std::string, storm::expressions::Expression>> JaniNextStateGenerator<ValueType, StateType>::computeLabelling() {
+    std::vector<std::pair<std::string, storm::expressions::Expression>> transientVariableExpressions;
+    for (auto const& variable : model.getGlobalVariables().getTransientVariables()) {
+        if (variable.getType().isBasicType() && variable.getType().asBasicType().isBooleanType()) {
+            if (this->options.isBuildAllLabelsSet() || this->options.getLabelNames().find(variable.getName()) != this->options.getLabelNames().end()) {
+                transientVariableExpressions.emplace_back(variable.getName(), variable.getExpressionVariable().getExpression());
+            }
+        }
+    }
+    return transientVariableExpressions;
+}
+
+template<typename ValueType, typename StateType>
 std::vector<ValueType> JaniNextStateGenerator<ValueType, StateType>::evaluateRewardExpressions() const {
     std::vector<ValueType> result;
     result.reserve(rewardExpressions.size());

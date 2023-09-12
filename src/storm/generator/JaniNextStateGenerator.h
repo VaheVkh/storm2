@@ -61,6 +61,8 @@ class JaniNextStateGenerator : public NextStateGenerator<ValueType, StateType> {
                                                        std::vector<StateType> const& initialStateIndices = {},
                                                        std::vector<StateType> const& deadlockStateIndices = {}) override;
 
+    virtual std::vector<std::pair<std::string, storm::expressions::Expression>> computeLabelling() override;
+
     virtual std::shared_ptr<storm::storage::sparse::ChoiceOrigins> generateChoiceOrigins(std::vector<boost::any>& dataForChoiceOrigins) const override;
 
     /*!
