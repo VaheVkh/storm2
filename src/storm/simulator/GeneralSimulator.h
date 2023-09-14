@@ -75,7 +75,6 @@ class GeneralSimulator {
      */
     std::vector<std::string> getRewardNames() const;
 
-    virtual std::vector<prism::Label> const& helperGetLabels() const = 0;
     virtual storm::expressions::ExpressionManager& helperGetManager() const = 0;
 
    protected:

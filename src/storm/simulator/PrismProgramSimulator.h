@@ -32,8 +32,6 @@ class DiscreteTimePrismProgramSimulator : public GeneralSimulator<ValueType> {
      */
     DiscreteTimePrismProgramSimulator(storm::prism::Program const& program, storm::generator::NextStateGeneratorOptions const& options);
 
-    std::vector<prism::Label> helperGetLabels() const override;
-
     storm::expressions::ExpressionManager& helperGetManager() const override;
 
    protected:

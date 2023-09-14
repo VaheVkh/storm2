@@ -16,10 +16,6 @@ DiscreteTimePrismProgramSimulator<ValueType>::DiscreteTimePrismProgramSimulator(
 
     }
 
-    template<typename ValueType>
-    std::vector<prism::Label> DiscreteTimePrismProgramSimulator<ValueType>::helperGetLabels() const {
-        return program.getLabels();
-    }
 
     template<typename ValueType>
     storm::expressions::ExpressionManager& DiscreteTimePrismProgramSimulator<ValueType>::helperGetManager() const {
