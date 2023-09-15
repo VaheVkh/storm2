@@ -241,6 +241,13 @@ storm::models::sparse::StateLabeling NextStateGenerator<ValueType, StateType>::l
     return result;
 }
 
+
+template<typename ValueType, typename StateType>
+bool NextStateGenerator<ValueType, StateType>::evaluateBooleanExpressionInCurrentState(expressions::Expression const& expr) const {
+    return this->evaluator->asBool(expr);
+}
+
+
 template<typename ValueType, typename StateType>
 void NextStateGenerator<ValueType, StateType>::unpackTransientVariableValuesIntoEvaluator(CompressedState const&,
                                                                                           storm::expressions::ExpressionEvaluator<ValueType>&) const {

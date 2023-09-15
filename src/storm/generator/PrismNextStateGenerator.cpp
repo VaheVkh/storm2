@@ -425,11 +425,6 @@ StateBehavior<ValueType, StateType> PrismNextStateGenerator<ValueType, StateType
 }
 
 template<typename ValueType, typename StateType>
-bool PrismNextStateGenerator<ValueType, StateType>::evaluateBooleanExpressionInCurrentState(expressions::Expression const& expr) const {
-    return this->evaluator->asBool(expr);
-}
-
-template<typename ValueType, typename StateType>
 CompressedState PrismNextStateGenerator<ValueType, StateType>::applyUpdate(CompressedState const& state, storm::prism::Update const& update) {
     CompressedState newState(state);
 

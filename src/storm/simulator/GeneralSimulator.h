@@ -22,7 +22,7 @@ class GeneralSimulator {
      * @param zeroRewards Helper for last action reward construction.
      */
 
-    GeneralSimulator(std::vector<ValueType> zeroRewards);
+    GeneralSimulator();
 
     /**
      * Set the simulation seed.

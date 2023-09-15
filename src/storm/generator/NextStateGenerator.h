@@ -138,6 +138,8 @@ class NextStateGenerator {
      */
     void remapStateIds(std::function<StateType(StateType const&)> const& remapping);
 
+    bool evaluateBooleanExpressionInCurrentState(storm::expressions::Expression const&) const;
+
    protected:
     /*!
      * Creates the state labeling for the given states using the provided labels and expressions.

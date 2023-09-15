@@ -9,10 +9,9 @@ using namespace storm::generator;
 namespace storm::simulator {
 
 template<typename ValueType>
-GeneralSimulator<ValueType>::GeneralSimulator(std::vector<ValueType> zeroRewards)
+GeneralSimulator<ValueType>::GeneralSimulator()
       :
-        zeroRewards(zeroRewards),
-        lastActionRewards(zeroRewards){
+        currentState(){
     // Current state needs to be overwritten to actual initial state.
     // But first, let us create a state generator.
 
@@ -170,5 +169,8 @@ void GeneralSimulator<ValueType>::clearStateCaches() {
     idToState.clear();
     stateToId = storm::storage::BitVectorHashMap<uint32_t>(stateGenerator->getStateSize());
 }
+
+template class GeneralSimulator<double>;
+template class GeneralSimulator<storm::RationalNumber>;
 
 } // namespace storm::simulator
