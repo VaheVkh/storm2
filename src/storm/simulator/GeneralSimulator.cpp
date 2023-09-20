@@ -5,18 +5,19 @@
 
 using namespace storm::generator;
 
-
 namespace storm::simulator {
 
 template<typename ValueType>
-GeneralSimulator<ValueType>::GeneralSimulator()
-      :
-        currentState(){
+GeneralSimulator<ValueType>::GeneralSimulator(std::shared_ptr<storm::generator::NextStateGenerator<ValueType, uint32_t>> stateGenerator)
+      : currentState(),
+        stateGenerator(stateGenerator),
+        zeroRewards(this->stateGenerator->getNumberOfRewardModels(), storm::utility::zero<ValueType>()),
+        lastActionRewards(this->zeroRewards)
+{
     // Current state needs to be overwritten to actual initial state.
     // But first, let us create a state generator.
-
-    clearStateCaches();
-    resetToInitial();
+    this->clearStateCaches();
+    this->resetToInitial();
 }
 
 

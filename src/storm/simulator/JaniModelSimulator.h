@@ -38,8 +38,6 @@ class DiscreteTimeJaniModelSimulator : public GeneralSimulator<ValueType> {
    protected:
     /// The model that we are simulating.
     storm::jani::Model const& model;
-    /// Generator for the next states
-    std::shared_ptr<storm::generator::JaniNextStateGenerator<ValueType, uint32_t>> stateGenerator;
 
 };
 } // namespace storm::simulator

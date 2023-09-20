@@ -37,8 +37,6 @@ class DiscreteTimePrismProgramSimulator : public GeneralSimulator<ValueType> {
    protected:
     /// The program that we are simulating.
     storm::prism::Program const& program;
-   /// Generator for the next states
-    std::shared_ptr<storm::generator::PrismNextStateGenerator<ValueType, uint32_t>> stateGenerator;
 
 };
 } // namespace storm::simulator

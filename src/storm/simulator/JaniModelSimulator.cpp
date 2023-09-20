@@ -8,11 +8,9 @@ namespace storm::simulator {
 template<typename ValueType>
 DiscreteTimeJaniModelSimulator<ValueType>::DiscreteTimeJaniModelSimulator(storm::jani::Model const& model,
                                                                                 storm::generator::NextStateGeneratorOptions const& options)
-    : model(model),
-      stateGenerator(std::make_shared<storm::generator::JaniNextStateGenerator<ValueType, uint32_t>>(model, options))
+    : GeneralSimulator<ValueType>( std::make_shared<storm::generator::JaniNextStateGenerator<ValueType, uint32_t>>(model, options)),
+      model(model)
 {
-    this->zeroRewards.assign(stateGenerator->getNumberOfRewardModels(), storm::utility::zero<ValueType>());
-    this->lastActionRewards = this->zeroRewards;
 }
 
 template<typename ValueType>

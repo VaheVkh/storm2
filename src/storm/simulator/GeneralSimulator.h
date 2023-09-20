@@ -22,7 +22,7 @@ class GeneralSimulator {
      * @param zeroRewards Helper for last action reward construction.
      */
 
-    GeneralSimulator();
+    GeneralSimulator(std::shared_ptr<storm::generator::NextStateGenerator<ValueType, uint32_t>> stateGenerator);
 
     /**
      * Set the simulation seed.
@@ -85,8 +85,6 @@ class GeneralSimulator {
      */
     uint32_t getOrAddStateIndex(generator::CompressedState const&);
 
-//    /// The program that we are simulating.
-//    storm::prism::Program const& program;
     /// The current state in the program, in its compressed form.
     generator::CompressedState currentState;
     /// Generator for the next states
