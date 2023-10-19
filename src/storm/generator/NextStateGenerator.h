@@ -119,9 +119,16 @@ class NextStateGenerator {
 
     virtual std::map<std::string, storm::storage::PlayerIndex> getPlayerNameToIndexMap() const;
 
-    virtual storm::models::sparse::StateLabeling label(storm::storage::sparse::StateStorage<StateType> const& stateStorage,
+    virtual void getLabelsAndExpressions(storm::storage::sparse::StateStorage<StateType> const& stateStorage,
+                                        std::vector<StateType> const& initialStateIndices = {},
+                                        std::vector<StateType> const& deadlockStateIndices = {},
+                                        std::vector<std::pair<std::string, storm::expressions::Expression>>&  labelsAndExpressions ={});
+
+    storm::models::sparse::StateLabeling label(storm::storage::sparse::StateStorage<StateType> const& stateStorage,
                                                        std::vector<StateType> const& initialStateIndices = {},
-                                                       std::vector<StateType> const& deadlockStateIndices = {}) = 0;
+                                                       std::vector<StateType> const& deadlockStateIndices = {});
+
+
 
     virtual std::vector<std::pair<std::string, storm::expressions::Expression>> computeLabelling() = 0;
 
@@ -141,12 +148,13 @@ class NextStateGenerator {
     bool evaluateBooleanExpressionInCurrentState(storm::expressions::Expression const&) const;
 
    protected:
+
     /*!
      * Creates the state labeling for the given states using the provided labels and expressions.
      */
-    storm::models::sparse::StateLabeling label(storm::storage::sparse::StateStorage<StateType> const& stateStorage,
-                                               std::vector<StateType> const& initialStateIndices, std::vector<StateType> const& deadlockStateIndices,
-                                               std::vector<std::pair<std::string, storm::expressions::Expression>> labelsAndExpressions);
+//    storm::models::sparse::StateLabeling label(storm::storage::sparse::StateStorage<StateType> const& stateStorage,
+//                                               std::vector<StateType> const& initialStateIndices, std::vector<StateType> const& deadlockStateIndices,
+//                                               std::vector<std::pair<std::string, storm::expressions::Expression>> labelsAndExpressions);
 
     /*!
      * Sets the values of all transient variables in the current state to the given evaluator.

@@ -57,6 +57,11 @@ class JaniNextStateGenerator : public NextStateGenerator<ValueType, StateType> {
     virtual std::size_t getNumberOfRewardModels() const override;
     virtual storm::builder::RewardModelInformation getRewardModelInformation(uint64_t const& index) const override;
 
+    virtual void getLabelsAndExpressions(const storm::storage::sparse::StateStorage<StateType>& stateStorage,
+                                       const std::vector<StateType>& initialStateIndices,
+                                       const std::vector<StateType>& deadlockStateIndices,
+                                       std::vector<std::pair<std::string, storm::expressions::Expression>>& labelsAndExpressions) override;
+
     virtual storm::models::sparse::StateLabeling label(storm::storage::sparse::StateStorage<StateType> const& stateStorage,
                                                        std::vector<StateType> const& initialStateIndices = {},
                                                        std::vector<StateType> const& deadlockStateIndices = {}) override;

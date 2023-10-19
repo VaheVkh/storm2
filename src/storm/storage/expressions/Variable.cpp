@@ -32,7 +32,7 @@ bool Variable::operator<(Variable const& other) const {
 }
 
 storm::expressions::Expression Variable::getExpression() const {
-    return storm::expressions::Expression(*this);
+    return storm::expressions::Expression (*this);
 }
 
 uint_fast64_t Variable::getIndex() const {

@@ -75,11 +75,19 @@ bool GeneralSimulator<ValueType>::isSinkState() const {
 template<typename ValueType>
 std::vector<std::string> GeneralSimulator<ValueType>::getCurrentStateLabelling() const {
     std::vector<std::string> labels;
-    for (auto const& label : stateGenerator->computeLabelling()) {
+    for (auto const& label : stateGenerator->getLabelsAndExpressions()) {
+        std::cout << "79" << std::endl;
+        std::cout << "label first "<< label.first << std::endl;
+        std::cout << "label second "<< label.second << std::endl;
+        std::cout << "bool" << stateGenerator->evaluateBooleanExpressionInCurrentState(label.second) << std::endl;
         if (stateGenerator->evaluateBooleanExpressionInCurrentState(label.second)) {
+            std::cout << "label.first " << label.first << std::endl;
+            std::cout << "label.second " << label.second <<  std::endl;
+
             labels.push_back(label.first);
         }
     }
+    std::cout << "labels size " << labels.size() << std::endl;
     return labels;
 }
 

@@ -169,11 +169,16 @@ storm::storage::sparse::StateValuations NextStateGenerator<ValueType, StateType>
     }
     return valuationsBuilder.build(observabilityMap.size());
 }
+/*Es qez shat em sirummmmmm
+Es el qez em shaaaaaaaaaaaaaat sirum im kyanqi aregaaaaaaaaaaaaaaaaaaaak
+TIM TGHA, es toghery chjnjes*/
 
 template<typename ValueType, typename StateType>
-storm::models::sparse::StateLabeling NextStateGenerator<ValueType, StateType>::label(
-    storm::storage::sparse::StateStorage<StateType> const& stateStorage, std::vector<StateType> const& initialStateIndices,
-    std::vector<StateType> const& deadlockStateIndices, std::vector<std::pair<std::string, storm::expressions::Expression>> labelsAndExpressions) {
+void NextStateGenerator<ValueType, StateType>::getLabelsAndExpressions(storm::storage::sparse::StateStorage<StateType> const& stateStorage,
+                                                                       std::vector<StateType> const& initialStateIndices,
+                                                                       std::vector<StateType> const& deadlockStateIndices,
+                                                                       std::vector<std::pair<std::string, storm::expressions::Expression>>& labelsAndExpressions)
+    {
     labelsAndExpressions.insert(labelsAndExpressions.end(), this->options.getExpressionLabels().begin(), this->options.getExpressionLabels().end());
 
     // Make the labels unique.
@@ -187,6 +192,17 @@ storm::models::sparse::StateLabeling NextStateGenerator<ValueType, StateType>::l
                           });
     labelsAndExpressions.resize(std::distance(labelsAndExpressions.begin(), it));
 
+    // split here
+}
+
+template<typename ValueType, typename StateType>
+storm::models::sparse::StateLabeling NextStateGenerator<ValueType, StateType>::label(
+    storm::storage::sparse::StateStorage<StateType> const& stateStorage, std::vector<StateType> const& initialStateIndices,
+    std::vector<StateType> const& deadlockStateIndices) {
+
+
+    std::vector<std::pair<std::string, storm::expressions::Expression>> labelsAndExpressions;
+    getLabelsAndExpressions(stateStorage, initialStateIndices, deadlockStateIndices, labelsAndExpressions);
     // Prepare result.
     storm::models::sparse::StateLabeling result(stateStorage.getNumberOfStates());
 

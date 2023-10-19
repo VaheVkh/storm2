@@ -1206,20 +1206,21 @@ storm::builder::RewardModelInformation JaniNextStateGenerator<ValueType, StateTy
 }
 
 template<typename ValueType, typename StateType>
-storm::models::sparse::StateLabeling JaniNextStateGenerator<ValueType, StateType>::label(storm::storage::sparse::StateStorage<StateType> const& stateStorage,
-                                                                                         std::vector<StateType> const& initialStateIndices,
-                                                                                         std::vector<StateType> const& deadlockStateIndices) {
+void JaniNextStateGenerator<ValueType, StateType>::getLabelsAndExpressions(storm::storage::sparse::StateStorage<StateType> const& stateStorage,
+                                                                           std::vector<StateType> const& initialStateIndices,
+                                                                           std::vector<StateType> const& deadlockStateIndices,
+                                                                           std::vector<std::pair<std::string, storm::expressions::Expression>>& labelsAndExpressions)  {
+
     // As in JANI we can use transient boolean variable assignments in locations to identify states, we need to
     // create a list of boolean transient variables and the expressions that define them.
-    std::vector<std::pair<std::string, storm::expressions::Expression>> transientVariableExpressions;
     for (auto const& variable : model.getGlobalVariables().getTransientVariables()) {
         if (variable.getType().isBasicType() && variable.getType().asBasicType().isBooleanType()) {
             if (this->options.isBuildAllLabelsSet() || this->options.getLabelNames().find(variable.getName()) != this->options.getLabelNames().end()) {
-                transientVariableExpressions.emplace_back(variable.getName(), variable.getExpressionVariable().getExpression());
+                labelsAndExpressions.emplace_back(variable.getName(), variable.getExpressionVariable().getExpression());
             }
         }
     }
-    return NextStateGenerator<ValueType, StateType>::label(stateStorage, initialStateIndices, deadlockStateIndices, transientVariableExpressions);
+    label(stateStorage, initialStateIndices, deadlockStateIndices);
 }
 
 template<typename ValueType, typename StateType>
@@ -1232,6 +1233,7 @@ std::vector<std::pair<std::string, storm::expressions::Expression>> JaniNextStat
             }
         }
     }
+
     return transientVariableExpressions;
 }
 

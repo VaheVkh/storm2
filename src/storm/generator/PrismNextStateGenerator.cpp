@@ -814,6 +814,8 @@ storm::models::sparse::StateLabeling PrismNextStateGenerator<ValueType, StateTyp
     std::vector<std::pair<std::string, storm::expressions::Expression>> labels;
     if (this->options.isBuildAllLabelsSet()) {
         for (auto const& label : program.getLabels()) {
+            std::cout << "name "<<label.getName()<<std::endl;
+            std::cout <<"expression " <<label.getStatePredicateExpression() <<std::endl;
             labels.push_back(std::make_pair(label.getName(), label.getStatePredicateExpression()));
         }
     } else {

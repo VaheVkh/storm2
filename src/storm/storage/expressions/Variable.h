@@ -75,7 +75,7 @@ class Variable {
     /*!
      * Retrieves an expression that represents the variable.
      *
-     * @return An expression that represents the varible.
+     * @return An expression that represents the variable.
      */
     storm::expressions::Expression getExpression() const;
 
